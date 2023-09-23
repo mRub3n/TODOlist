@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include("header.ejs") %>
+        <link rel="stylesheet" href="/styles/main.css" />
+        <title>Today List</title>
+</head>
+
+<body>
+    <main>
+        <div class="box" id="heading">
+            <h1>
+                <% var today=new Date(); %>
+                    <% const months=["January", "February" , "March" , "April" , "May" , "June" , "July" , "August"
+                        , "September" , "October" , "November" , "December" ];%>
+                        <% var mm=today.getMonth(); %>
+                            <% let month=months[mm]; %>
+                                <% const days=["Sunday", "Monday" , "Tuesday" , "Wednesday" , "Thursday" , "Friday"
+                                    , "Saturday" ]; %>
+                                    <% var wd=today.getDay(); %>
+                                        <% let weekDay=days[wd]; %>
+                                            <% var dd=today.getDate();%>
+                                                <%= weekDay + ", " + month + " " + dd %>
+            </h1>
+        </div>
+
+
+                    <div class="container mt-4">
+                        <ul class="list-group list-group-flush">
+
+                            <% if(locals.todoList) { %> 
+                            <% todoList.forEach(function(item) { %>
+                                <%  %>
+                            <li class="list-group-item">
+                                <input class="form-check-input strikethrough mt-2" type="checkbox" value=""
+                                <%= checkboxState %>>
+                                <label class="strikeThis">
+                                     <%= item %>
+                                </label>
+                            </li>
+                            <% }); %>
+                            <% }; %>
+                        </ul>
+
+                        
+
+                        <form class="row g-2 mt-4" action="/today" method="POST">
+                            <div class="col">
+                                <input type="text" name="newItem" class="form-control form-control-lg"
+                                    placeholder="Click to type..." />
+                            </div>
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-primary
+                                    btn-lg">+</button>
+                            </div>
+                        </form>
+                    </div>
+
+    </main>
+
+
+
+</body>
+
+</html>
